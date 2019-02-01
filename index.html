@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div id="calculator">
+            <div id="display" class="display"></div>
+            <div id="seven" class="num"><button>7</button></div>
+            <div id="eight" class="num"><button>8</button></div>
+            <div id="nine" class="num"><button>9</button></div>
+            <div id="divide" class="operator"><button>/</button></div>
+            <div id="four" class="num"><button>4</button></div>
+            <div id="five" class="num"><button>5</button></div>
+            <div id="six" class="num"><button>6</button></div>
+            <div id="multiply" class="operator"><button>*</button></div>
+            <div id="one" class="num"><button>1</button></div>
+            <div id="two" class="num"><button>2</button></div>
+            <div id="three" class="num"><button>3</button></div>
+            <div id="subtract" class="operator"><button>-</button></div>
+            <div id="zero" class="num"><button>0</button></div>
+            <div id="add" class="operator"><button>+</button></div>
+            <div id="equals" class="calculate"><button>=</button></div>
+            <div id="clear" class="clear"><button>AC</button></div>
+            <div id="decimal" class="decimal"><button>.</button></div>
+            <div id="delete" class="delete"><button>DEL</button></div>
+        </div>
+    </body>
+    <script>
+        const calculator = document.querySelector('#calculator');
+        const keys = calculator.querySelectorAll('button');
+        const currentDisplay = calculator.querySelector('#display');
+        let displayValue = '';
+        let firstNum;
+        let secondNum;
+        let operation = '';
+        
+        document.addEventListener('keydown',function(e){keyPressed(e)});
+        for (let i = 0;i < keys.length; i++) {
+            keys[i].addEventListener('click',function(e){updateDisplay(this)});
+        }
+        
+        function mapKey(str) {
+            switch (str) {
+                case '0':
+                    return 'zero';
+                case '1':
+                    return 'one';
+                case '2':
+                    return 'two';
+                case '3':
+                    return 'three';
+                case '4':
+                    return 'four';
+                case '5':
+                    return 'five';
+                case '6':
+                    return 'six';
+                case '7':
+                    return 'seven';
+                case '8':
+                    return 'eight';
+                case '9':
+                    return 'nine';
+                case '*':
+                    return 'multiply';
+                case '-':
+                    return 'subtract';
+                case '/':
+                    return 'divide';
+                case '+':
+                    return 'add';
+                case '=':
+                    return 'equals';
+                case 'Backspace':
+                    return 'delete';
+                case 'Enter':
+                    return 'equals';
+                default:
+                    return false;
+            }
+        }
+        function keyPressed(e) {
+            let key = mapKey(e.key);
+            console.log(key);
+            if(key) {
+                let obj = document.querySelector(`#${key}`).firstChild;
+                updateDisplay(obj);
+            }
+        }
+        function updateDisplay (obj) {
+            if(obj.parentNode.className === 'operator') {
+                if(displayValue === '') {
+
+                }
+                else if (firstNum !== '' && operation !== '' && displayValue !== '') {
+                    secondNum = parseFloat(displayValue);
+                    displayValue = '';
+                    firstNum = operate(firstNum,secondNum,operation);
+                    secondNum = '';
+                    operation = obj.parentNode.id.toString();
+                }
+                else {
+                    firstNum = parseFloat(displayValue);
+                    operation = obj.parentNode.id.toString();
+                    displayValue = '';
+                }
+            }
+            else if (obj.parentNode.className === "calculate") {
+                if(!(firstNum === '' || operation === '')) {
+                    secondNum = parseFloat(displayValue);
+                    displayValue = operate(firstNum,secondNum,operation);
+                    firstNum = parseFloat(displayValue);
+                    secondNum = '';
+                    operation = '';
+                }
+            }
+            else if (obj.parentNode.className === 'clear'){
+                displayValue = '';
+                firstNum = '';
+                secondNum = '';
+            }
+            else if (obj.parentNode.className === 'delete'){
+                if (displayValue !== '' && displayValue.length > 1) {
+                    displayValue = displayValue.slice(0,displayValue.length - 1);
+                }
+                else {
+                    displayValue = '';
+                }
+            }
+            else {
+                if(!(obj.textContent === '.' && displayValue.indexOf('.') >= 0)) {
+                    displayValue += obj.textContent;
+                }
+            }
+            
+            currentDisplay.textContent = displayValue;
+        }
+        function operate (num1, num2, operator) {
+            switch (operator) {
+                case 'add':
+                    return addition(num1,num2);
+                case 'subtract':
+                    return subtraction(num1,num2);
+                case 'multiply':
+                    return multiplication(num1,num2);
+                case 'divide':
+                    return division(num1,num2);
+                default:
+                    return;
+            }
+        }
+
+        function addition (num1, num2) {
+            return num1 + num2;
+        }
+        function subtraction (num1, num2) {
+            return num1 - num2;
+        }
+        function multiplication (num1, num2) {
+            return num1 * num2;
+        }
+        function division (num1, num2) {
+            if (num2 === 0) {
+                return "You can't divide by 0!";
+            }
+            else {
+                return num1 / num2;
+            }
+        }
+    </script>
+</html>

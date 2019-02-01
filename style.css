@@ -1,0 +1,103 @@
+body {
+    background-color: lavender;
+}
+#calculator {
+    display: grid;
+    max-width: 300px;
+    max-height: 300px;
+    margin-left: 33%;
+    margin-top: 5%;
+    grid-gap: 4%;
+}
+#display {
+    grid-column: 1/5;
+    grid-row: 1;
+    text-align: right;
+    border-color: grey;
+    border-width: 1px;
+    border-style: solid;
+    min-height: 1.1em;
+    background-color: white;
+}
+#seven {
+    grid-column: 1 / 1;
+    grid-row: 2;
+}
+#eight {
+    grid-column: 2 / 2;
+    grid-row: 2;
+}
+#nine {
+    grid-column: 3 / 3;
+    grid-row: 2;
+}
+#divide {
+    grid-column: 4 / 4;
+    grid-row: 2;
+}
+#four {
+    grid-column: 1 / 1;
+    grid-row: 3;
+}
+#five {
+    grid-column: 2 / 2;
+    grid-row: 3;
+}
+#six {
+    grid-column: 3 / 3;
+    grid-row: 3;
+}
+#multiply {
+    grid-column: 4 / 4;
+    grid-row: 3;
+}
+#one {
+    grid-column: 1 / 1;
+    grid-row: 4;
+}
+#two {
+    grid-column: 2 / 2;
+    grid-row: 4;
+}
+#three {
+    grid-column: 3 / 3;
+    grid-row: 4;
+}
+#subtract {
+    grid-column: 4 / 4;
+    grid-row: 4;
+}
+#zero {
+    grid-column: 2 / 2;
+    grid-row: 5;
+}
+#add {
+    grid-column: 4 / 4;
+    grid-row: 5;
+}
+#clear {
+    grid-column: 1 / 1;
+    grid-row: 5;
+}
+#equals {
+    grid-column: 2 / 5;
+    grid-row: 6;
+}
+#decimal {
+    grid-column: 3 / 3;
+    grid-row: 5;
+}
+#DEL {
+    grid-column: 1 / 2;
+    grid-row: 6;
+}
+button {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(118, 120, 121);
+    color: white;
+}
+.num button {
+    color: rgb(3, 3, 3);
+    background-color: rgba(182, 178, 172, 0.705);
+}
